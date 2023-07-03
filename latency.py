@@ -124,7 +124,7 @@ def main():
     result = measure_latency(config.get('latency', {}))
     print(result)
     # Write to InfluxDB
-    write_latency_to_influxdb(result, config.get('influxdb', {}))
+    write_latency_to_influxdb(result, config)
 
 
 if __name__ == '__main__':
