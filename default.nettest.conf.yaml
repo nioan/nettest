@@ -6,6 +6,7 @@ latency:
   percentiles:
     - 5
     - 95
+    - 99
 cron:
   latency: "*/10 * * * *"
 # InfluxDB configuration
@@ -14,5 +15,5 @@ influxdb:
   port: 8086
   latency_database: latency
   tags: 
-  - pi-wifi
+  - wifi
   - uno
