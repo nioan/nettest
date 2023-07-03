@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import time
 import numpy as np
+import socket
 from influxdb import InfluxDBClient
 from scapy.all import IP, ICMP, sr1
 from config import read_nettest_config
@@ -64,7 +65,9 @@ def write_latency_to_influxdb(result, influxdb_config):
                             password=influxdb_config.get('password', ''),
                             database=influxdb_config.get(
                                 'latency_database', 'latency'))
-
+    host = socket.gethostname()
+    tags = influxdb_config.get('tags', {})
+    tags = {**tags, 'host': host}
     sent_packets = result['sent_packets']
     lost_packets = result['lost_packets']
     percentage_lost = (

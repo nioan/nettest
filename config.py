@@ -1,9 +1,11 @@
 import os
 
 import yaml
+from dotenv import load_dotenv
 
 
 def read_nettest_config():
+    load_dotenv()
     script_dir = os.path.dirname(os.path.realpath(__file__))
     default_config_file = os.path.join(script_dir, 'nettest.conf.yaml')
     # Get the file path from the environment variable
