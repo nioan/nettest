@@ -57,7 +57,8 @@ def measure_latency(config):
     }
 
 
-def write_latency_to_influxdb(result, influxdb_config):
+def write_latency_to_influxdb(result, config):
+    influxdb_config = config.get('influxdb', {})
     print(f'influx_db_host: {influxdb_config.get("host", "N/A")}')
     client = InfluxDBClient(host=influxdb_config.get('host', 'localhost'),
                             port=influxdb_config.get('port', 8086),
@@ -67,7 +68,10 @@ def write_latency_to_influxdb(result, influxdb_config):
                                 'latency_database', 'latency'))
     host = socket.gethostname()
     tags = influxdb_config.get('tags', {})
-    tags = {**tags, 'host': host}
+    tags = {**tags, 
+            'host': host, 
+            'target': result.get('target_ip', '8.8.8.8'),
+            'timeout': result.get('timeout', 1)}
     sent_packets = result['sent_packets']
     lost_packets = result['lost_packets']
     percentage_lost = (
