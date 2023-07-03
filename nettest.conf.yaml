@@ -1,0 +1,15 @@
+# Measurement configuration
+latency:
+  num_packets: 50
+  timeout: 1
+  target_ip: 8.8.8.8
+  percentiles:
+    - 5
+    - 95
+cron:
+  latency: "*/10 * * * *"
+# InfluxDB configuration
+influxdb:
+  host: 192.168.86.33
+  port: 8086
+  latency_database: latency
