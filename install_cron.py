@@ -33,3 +33,7 @@ def setup_cron_jobs(cron):
 def main():
     config = read_nettest_config()
     setup_cron_jobs(config.get('cron', {}))
+
+
+if __name__ == '__main__':
+    main()
