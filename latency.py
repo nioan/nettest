@@ -77,15 +77,18 @@ def write_latency_to_influxdb(result, influxdb_config):
     datapoints = [
         {
             'measurement': 'sent_packets',
-            'fields': {'value': sent_packets}
+            'fields': {'value': sent_packets},
+            'tags': tags
         },
         {
             'measurement': 'lost_packets',
-            'fields': {'value': lost_packets}
+            'fields': {'value': lost_packets},
+            'tags': tags
         },
         {
             'measurement': 'percentage_lost_packets',
-            'fields': {'value': percentage_lost}
+            'fields': {'value': percentage_lost},
+            'tags': tags
         }
     ]
 
@@ -97,12 +100,14 @@ def write_latency_to_influxdb(result, influxdb_config):
                 for percentile, percentile_value in value.items():
                     datapoints.append({
                         'measurement': f'{measurement}_{key}_{percentile}',
-                        'fields': {'value': percentile_value}
+                        'fields': {'value': percentile_value},
+                        'tags': tags
                     })
             else:
                 datapoints.append({
                     'measurement': f'{measurement}_{key}',
-                    'fields': {'value': value}
+                    'fields': {'value': value},
+                    'tags': tags
                 })
     client.write_points(datapoints)
 

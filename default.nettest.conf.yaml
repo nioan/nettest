@@ -15,5 +15,5 @@ influxdb:
   port: 8086
   latency_database: latency
   tags: 
-  - connection: wifi
-  - provider: uno
+    connection: wifi
+    provider: uno
