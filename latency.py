@@ -29,7 +29,8 @@ def measure_latency(config):
     for _ in range(num_packets):
         # Send ICMP packet and record timestamp
         sent_time = time.time()
-        response = sr1(IP(dst=target_ip) / ICMP(), timeout=timeout, verbose=False)
+        response = sr1(IP(dst=target_ip) / ICMP(), timeout=timeout,
+                       verbose=False)
         received_time = time.time()
 
         # Count packets
