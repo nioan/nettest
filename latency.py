@@ -25,7 +25,7 @@ def measure_latency(config):
     lost_packets = 0
     latencies = []
     jitters = []
-
+    print(f'Sending {num_packets} ICMP packets to {target_ip}')
     for _ in range(num_packets):
         # Send ICMP packet and record timestamp
         sent_time = time.time()
